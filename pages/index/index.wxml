@@ -3,7 +3,7 @@
   <view class="top-nav-inner">
     <!-- 自动定位城市开始 -->
     <view class="city-entry">
-        <text class="city-name">北京</text>
+        <text class="city-name">{{cityname}}</text>
         <text class="city-entry-arrow"></text>
     </view>
     <!-- 自动定位城市结束 -->
@@ -28,7 +28,7 @@
   <!-- 单一影片开始 -->
   <view class="movie-item" 
     wx:for="{{movies}}" wx:key="id">
-      <navigator url="/pages/movie/movie" hover-class="none">
+      <navigator url="/pages/movie/movie?id={{item.id}}" hover-class="none">
         <!-- 图片开始 -->
         <view class="movie-item-avatar">
           <image src="{{item.cover}}"></image>

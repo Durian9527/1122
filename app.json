@@ -1,9 +1,18 @@
 {
     "pages": [
-        "pages/index/index",
-        "pages/theatre/theatre",
-        "pages/me/me"
+      "pages/index/index",
+      "pages/theatre/theatre",
+      "pages/me/me",
+      "pages/movie/movie"
     ],
+    "permission": {
+      "scope.userLocation": {
+        "desc": "你的位置信息将用于小程序位置接口的调用" 
+      }
+    },
+    "requiredPrivateInfos": [
+      "getLocation"
+  ],
     "window": {
         "backgroundTextStyle": "light",
         "navigationBarBackgroundColor": "#f03d37",

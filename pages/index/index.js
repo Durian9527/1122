@@ -3,6 +3,7 @@ Page({
   data: {
     cid: 1,
     movies: [],
+    cityname: ''
   },
 
   /**
@@ -83,8 +84,29 @@ Page({
   },
 
   onLoad() {
+    // 加载当前城市
+    this.loadCurrentCity()
     this.loadData(1, 0).then((data) => {
       this.setData({ movies: data });
     });
   },
+  /**
+   * 加载当前城市信息
+   */
+  loadCurrentCity() {
+    let QQMapWX = require('../../libs/qqmap-wx-jssdk')
+    let qqmapsdk = new QQMapWX({
+      key: 'UTQBZ-NLW35-OQTIJ-IOO27-5BE5E-FIFNS'
+    })
+    qqmapsdk.reverseGeocoder({
+      success: (res) => {
+        let cityname = res.result.address_component.city
+        this.setData({cityname})
+        console.log('逆地址解析结果：', cityname);
+      },
+      fail: (err) => {
+      console.warn(err)
+      }
+    })
+  }
 });
