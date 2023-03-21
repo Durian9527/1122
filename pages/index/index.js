@@ -69,6 +69,10 @@ Page({
     this.loadData(cid, 0).then(data => {
       this.setData({movies: data})
       wx.stopPullDownRefresh()
+      wx.setStorage({
+        key: cid+'',
+        data: data
+      })
     })
   },
 

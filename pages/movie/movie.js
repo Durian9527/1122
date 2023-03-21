@@ -5,7 +5,34 @@ Page({
    * 页面的初始数据
    */
   data: {
+    movieInfo: [],
+    isOpen: false
+  },
 
+  /**
+   * 监控是否显示完整简介
+   */
+  handleTapIntro() {
+    this.setData({isOpen: !this.data.isOpen})
+  },
+
+  /**
+   * 图片点击预览
+   */
+  handlePreviewImage(e) {
+    let i = e.target.dataset.i
+    if(i===undefined) {
+      return
+    }
+    let thumb = this.data.movieInfo.thumb
+    let urls = []
+    thumb.forEach(url => {
+      urls.push(url.substring(0, url.lastIndexOf('@')))
+    })
+    wx.previewImage({
+      current: urls[i],
+      urls,
+    })
   },
 
   /**
@@ -13,6 +40,15 @@ Page({
    */
   onLoad(options) {
     console.log(options);
+    wx.request({
+      url: 'https://api.tedu.cn/detail.php',
+      method: 'GET',
+      data: {id: options.id},
+      success: (res) => {
+        console.log(res);
+        this.setData({movieInfo: res.data})
+      }
+    })
   },
 
   /**

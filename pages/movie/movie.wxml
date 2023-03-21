@@ -25,8 +25,8 @@
 </view>
 <!-- 顶部区域结束 -->
 <!-- 简介区域开始 -->
-<view class="introduction">
-  <view class="line-clamp">
+<view class="introduction" bindtap="handleTapIntro">
+  <view class="{{isOpen? '' : 'line-clamp'}}">
   {{movieInfo.description}}
   </view>
   <view class="more">
@@ -41,7 +41,7 @@
     <view class="actors-item"
       wx:for="{{movieInfo.director}}"
       wx:key="index">
-      <image src="{{item.avatar}}"></image>
+      <image lazy-load src="{{item.avatar}}"></image>
       <text>导演：{{item.name}}</text>
     </view>
     
@@ -58,15 +58,9 @@
 <!-- 剧照开始 -->
 <view class="photos">
   <view class="title">视频和剧照</view>
-  <scroll-view scroll-x="true" class="photos-list">
-     <view class="photos-item">
-        <image src="/images/28ff191ca08fe6bf689bf07cb4aaa48584424@420w_279h_1e_1c.jpg"></image>
-     </view>
-     <view class="photos-item">
-       <image src="/images/8e94cab5781a1b748f1e5df936fb93f259685@420w_279h_1e_1c.jpg"></image>
-     </view>
-     <view class="photos-item">
-        <image src="/images/4978405667fb814106da76da72fec568128212@420w_279h_1e_1c.jpg"></image>
+  <scroll-view scroll-x="true" class="photos-list"  bindtap="handlePreviewImage" >
+     <view class="photos-item" wx:for="{{movieInfo.thumb}}" wx:key="index">
+        <image lazy-load mode="aspectFill" src="{{item}}" data-i="{{index}}"></image>
      </view>
   </scroll-view>
 </view>
